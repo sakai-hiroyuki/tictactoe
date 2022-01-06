@@ -14,9 +14,7 @@ class Player(ABC):
     '''
     def __init__(self, name: Optional[None]=None) -> None:
         self.name = name
-        self.records: dict[int, list[float]] = {}
-        for i in range(10):
-            self.records[i] = []
+        self.records: dict[int, list[float]] = {i: [] for i in range(10)}
     
     def __str__(self) -> str:
         if self.name:
@@ -72,7 +70,6 @@ def to_csv(players: list[Player], path: str) -> None:
         index=range(1, 10),
         columns=[player.name for player in players]
     )
-    print(df)
     df.to_csv(path)
 
 

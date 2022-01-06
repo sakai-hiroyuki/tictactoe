@@ -1,7 +1,6 @@
 from tqdm import tqdm
 
 from tictactoe import *
-from tictactoe.players import to_csv
 
 
 def experiment(
@@ -26,11 +25,9 @@ def experiment(
 
 
 if __name__ == '__main__':
-    player1 = MinMaxPlayer(boost=False)
-    player2 = MinMaxPlayer(ab=False, boost=False)
+    player1 = MinMaxPlayer()
+    player2 = RandomPlayer()
     game = TicTacToe(show_board=False)
 
-    experiment(game, player1, player2, 10)
-    experiment(game, player2, player1, 10)
-
-    to_csv([player1, player2], path='players.csv')
+    experiment(game, player1, player2, 300)
+    experiment(game, player2, player1, 300)
