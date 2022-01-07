@@ -12,7 +12,7 @@ class Player(ABC):
     '''
     tic-tac-toeのプレイヤーを表す抽象クラス.
     '''
-    def __init__(self, name: Optional[None]=None) -> None:
+    def __init__(self, name: Optional[str]=None) -> None:
         self.name = name
         self.records: dict[int, list[float]] = {i: [] for i in range(10)}
     
@@ -77,7 +77,7 @@ class RandomPlayer(Player):
     '''
     ランダムにマークをするtic-tac-toeのプレイヤー
     '''
-    def __init__(self, name: Optional[None]=None) -> None:
+    def __init__(self, name: Optional[str]=None) -> None:
         if name is None:
             name = 'RandomPlayer'
         super(RandomPlayer, self).__init__(name)
@@ -108,7 +108,7 @@ class HumanPlayer(Player):
     '''
     ユーザーの入力に従ってマークをするtic-tac-toeのプレイヤー
     '''
-    def __init__(self, name: Optional[None]=None) -> None:
+    def __init__(self, name: Optional[str]=None) -> None:
         if name is None:
             name = 'HumanPlayer'
         super(HumanPlayer, self).__init__(name)
@@ -157,7 +157,7 @@ class MinMaxPlayer(Player):
     '''
     def __init__(
         self,
-        name: Optional[None]=None,
+        name: Optional[str]=None,
         ab: bool=True,
         show_score: bool=False,
         boost: bool=True

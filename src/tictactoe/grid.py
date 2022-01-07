@@ -13,7 +13,7 @@ class Grid(object):
 
     Attributes
     ----------
-    marks: tuple[str, str]
+    marks: tuple[str, str]=('o','x')
         盤面に書き込むマークを表す長さ2のタプル.
         0番目の要素が先手, 1番目の要素が後手のマークを表す.
     '''
