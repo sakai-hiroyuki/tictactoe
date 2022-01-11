@@ -1,8 +1,6 @@
 import copy
 import random
-import pandas as pd
 from typing import Optional, cast
-from time import time
 from abc import ABC, abstractmethod
 
 from .grid import Grid
@@ -16,10 +14,9 @@ class Player(ABC):
         self.name = name
     
     def __str__(self) -> str:
-        if self.name:
-            return self.name
-        else:
+        if self.name is None:
             return 'Player'
+        return self.name
 
     @abstractmethod
     def choice(self, grid: Grid, mark: str) -> int:
@@ -51,8 +48,6 @@ class RandomPlayer(Player):
     ランダムにマークをするtic-tac-toeのプレイヤー
     '''
     def __init__(self, name: Optional[str]=None) -> None:
-        if name is None:
-            name = 'RandomPlayer'
         super(RandomPlayer, self).__init__(name)
     
     def choice(self, grid: Grid, mark: str) -> int:
@@ -82,8 +77,6 @@ class HumanPlayer(Player):
     ユーザーの入力に従ってマークをするtic-tac-toeのプレイヤー
     '''
     def __init__(self, name: Optional[str]=None) -> None:
-        if name is None:
-            name = 'HumanPlayer'
         super(HumanPlayer, self).__init__(name)
     
     def choice(self, grid: Grid, mark: str) -> int:
@@ -136,8 +129,6 @@ class MinMaxPlayer(Player):
         boost: bool=True
     ) -> None:
 
-        if name is None:
-            name = 'MiniMaxPlayer'
         self.ab = ab
         self.show_score = show_score
         self.boost = boost
@@ -163,7 +154,8 @@ class MinMaxPlayer(Player):
         '''
 
         if self.boost and grid.is_empty:
-            return random.choice(grid.blanks)
+            return 0
+            # return random.choice(grid.blanks)
 
         marks: tuple[str, str] = grid.marks
         best_indices: Optional[list[int]] = None

@@ -6,9 +6,9 @@ class Grid(object):
     tic-tac-toeのための3x3の盤面を表すクラス.
     盤面の位置は0から8のただ1つの整数のインデックスで表現され,
     実際の盤面とインデックスとの対応は
-        0|1|2
-        3|4|5
-        6|7|8
+        0|1|2  \\
+        3|4|5  \\
+        6|7|8  \\
     とする.
 
     Attributes
@@ -21,11 +21,11 @@ class Grid(object):
     '''
     def __init__(self, marks: tuple[str, str]=('o', 'x')) -> None:
         if '-' in marks:
-            raise ValueError()
+            raise ValueError(f'Invalid marks {marks}: Hyphens represent blanks.')
         if marks[0] == marks[1]:
-            raise ValueError()
+            raise ValueError(f'Invalid marks {marks}: Both players cannot use a common mark.')
         if len(marks) != 2:
-            raise ValueError()
+            raise ValueError(f'Invalid marks {marks}: Specify only two marks.')
 
         self.marks = marks
 

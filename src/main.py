@@ -1,6 +1,6 @@
 from tqdm import tqdm
 
-from tictactoe import TicTacToe, Player, MinMaxPlayer, RandomPlayer
+from tictactoe import TicTacToe, Player, MinMaxPlayer, RandomPlayer, Grid
 
 
 def experiment(
@@ -25,8 +25,10 @@ def experiment(
 
 
 if __name__ == '__main__':
-    player1 = MinMaxPlayer()
-    player2 = RandomPlayer()
-    game = TicTacToe(show_board=False)
+    player1 = MinMaxPlayer(name='MinMax')
+    player2 = RandomPlayer(name='Random')
+    print(f'{player1} vs {player2}')
+    grid = Grid(marks=('o', 'x'))
+    game = TicTacToe(grid=grid, show_board=False)
 
-    experiment(game, player1, player2, 100)
+    experiment(game, player1, player2, 1000)
