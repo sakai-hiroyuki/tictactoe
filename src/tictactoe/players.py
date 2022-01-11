@@ -14,7 +14,6 @@ class Player(ABC):
     '''
     def __init__(self, name: Optional[str]=None) -> None:
         self.name = name
-        self.records: dict[int, list[float]] = {i: [] for i in range(10)}
     
     def __str__(self) -> str:
         if self.name:
@@ -43,11 +42,8 @@ class Player(ABC):
         ...
     
     def place(self, grid: Grid, mark: str) -> None:
-        n_blanks = grid.n_blanks
-        tic: float = time()
         idx: int = self.choice(grid, mark)
         grid.place(mark, idx)
-        self.records[n_blanks].append(time() - tic)
 
 
 class RandomPlayer(Player):
@@ -251,26 +247,3 @@ class MinMaxPlayer(Player):
             else:
                 v = min(v, self._max_value(g))
         return v
-
-
-def to_csv(players: list[Player], path: str) -> None:
-    means: list[list[Optional[float]]] = []
-    for i in range(1, 10):
-        row: list[Optional[float]] = []
-        for player in players:
-            if len(player.records[i]) == 0:
-                row.append(None)
-            else:
-                _sum: float = 0.
-                for v in player.records[i]:
-                    _sum += v
-                ave: float = _sum / len(player.records)
-                row.append(ave)
-        means.append(row)
-    
-    df: pd.DataFrame = pd.DataFrame(
-        means,
-        index=range(1, 10),
-        columns=[player.name for player in players]
-    )
-    df.to_csv(path)

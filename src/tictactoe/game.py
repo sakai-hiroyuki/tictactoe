@@ -1,4 +1,5 @@
 from typing import Optional
+from copy import deepcopy
 
 from .grid import Grid
 from .players import Player
@@ -11,19 +12,17 @@ class TicTacToe(object):
     Attributes
     ----------
     grid: Grid=None
-        tic-tac-toeを行う盤面であるGridクラス.
+        tic-tac-toeの初期盤面を表すGridクラス.
         Noneであればゲーム開始時自動的に盤面が全て空欄のGridが与えられる.
     
     show_board: bool=True
         盤面が更新されるたびに, 盤面の内容を出力するかどうかを表す.
-    
-    refresh: bool=True
-        ゲーム開始時に盤面を初期化するかどうかを表す.
     '''
-    def __init__(self, grid: Grid=None, show_board: bool=True, refresh: bool=True) -> None:
-        self.grid = grid
-        self.show_board = show_board
-        self.refresh = refresh
+    def __init__(self, grid: Optional[Grid]=None, show_board: bool=True) -> None:
+        if grid is None:
+            grid = Grid()
+        self.grid: Grid = grid
+        self.show_board: bool = show_board
 
     def __call__(self, player1: Player, player2: Player) -> int:
         return self.tictactoe(player1, player2)
@@ -46,12 +45,7 @@ class TicTacToe(object):
             ゲームがどのように終了したかを表す数値を返す.
             具体的には, 「先手勝ちならば1」, 「引き分けならば0」, 「後手勝ちならば-1」を返す.
         '''
-        grid: Optional[Grid] = self.grid
-        if grid is None:
-            grid = Grid()
-        if self.refresh:
-            grid.refresh()
-
+        grid: Grid = deepcopy(self.grid)
         first: bool = True
         mark: str = grid.marks[0]
         player: Player = player1

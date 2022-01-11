@@ -27,7 +27,6 @@ def experiment(
 if __name__ == '__main__':
     player1 = MinMaxPlayer()
     player2 = RandomPlayer()
-    game = TicTacToe(show_board=False)
+    game = TicTacToe(show_board=True)
 
-    experiment(game, player1, player2, 300)
-    experiment(game, player2, player1, 300)
+    experiment(game, player1, player2, 100)

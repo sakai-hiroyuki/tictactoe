@@ -16,6 +16,8 @@ class Grid(object):
     marks: tuple[str, str]=('o','x')
         盤面に書き込むマークを表す長さ2のタプル.
         0番目の要素が先手, 1番目の要素が後手のマークを表す.
+        '-'は空欄を表す文字として扱うため指定した場合エラー.
+        先手後手が同じマークの場合もエラー.
     '''
     def __init__(self, marks: tuple[str, str]=('o', 'x')) -> None:
         if '-' in marks:
