@@ -1,6 +1,6 @@
 from tqdm import tqdm
 
-from tictactoe import *
+from tictactoe import TicTacToe, Player, MinMaxPlayer, RandomPlayer
 
 
 def experiment(
