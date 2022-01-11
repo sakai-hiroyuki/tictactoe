@@ -1,5 +1,5 @@
 # tictactoe
-The tictactoe game and its players.
+Tic-Tac-Toe and its players.
 
 ## Environment
 - Python 3.9
